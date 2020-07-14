@@ -71,6 +71,7 @@ function CampsiteInfo(props) {
                     <RenderComments comments={props.comments} />
                 </div>
             </div>
+            // comments
         );
     }
     return <div />;
