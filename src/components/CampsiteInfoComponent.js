@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import {
     Card,
     CardImg,
     CardText,
     CardBody,
-    CardTitle,
     Breadcrumb,
     BreadcrumbItem,
+    Button,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -44,10 +44,21 @@ function RenderComments({ comments }) {
                         </div>
                     );
                 })}
+                <CommentForm />
             </div>
         );
     }
     return <div />;
+}
+
+class CommentForm extends Component {
+    render() {
+        return (
+            <Button outline onClick={this.toggleModal}>
+                <i className="fa fa-pencil fa-lg" /> Submit Comment
+            </Button>
+        );
+    }
 }
 
 function CampsiteInfo(props) {
@@ -71,7 +82,6 @@ function CampsiteInfo(props) {
                     <RenderComments comments={props.comments} />
                 </div>
             </div>
-            // comments
         );
     }
     return <div />;
