@@ -1,21 +1,26 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import logger from "redux-logger";
-import { Campsites } from "./campsites";
-import { Comments } from "./comments";
-import { Partners } from "./partners";
-import { Promotions } from "./promotions";
+import * as ActionTypes from "./ActionTypes";
 
-export const ConfigureStore = () => {
-    const store = createStore(
-        combineReducers({
-            campsites: Campsites,
-            comments: Comments,
-            partners: Partners,
-            promotions: Promotions,
-        }),
-        applyMiddleware(thunk, logger)
-    );
-
-    return store;
+export const Campsites = (
+    state = {
+        isLoading: true,
+        errMess: null,
+        campsites: [],
+    },
+    action
+) => {
+    switch (action.type) {
+        case ActionTypes.ADD_CAMPSITES:
+            return {
+                ...state,
+                isLoading: false,
+                errMess: null,
+                campsites: action.payload,
+            };
+        case ActionTypes.CAMPSITES_LOADING:
+            return { ...state, isLoading: true, errMess: null, campsites: [] };
+        case ActionTypes.CAMPSITES_FAILED:
+            return { ...state, isLoading: false, errMess: action.payload };
+        default:
+            return state;
+    }
 };
